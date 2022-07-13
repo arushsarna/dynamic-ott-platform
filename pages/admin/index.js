@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 
 import * as cookie from "cookie";
 import { useRouter } from "next/router";
-// layout for page
+
 export async function getServerSideProps(context) {
   const parsedCookies = cookie.parse(context.req.headers.cookie || "");
-
+  console.log(parsedCookies.JWT);
   const auth = await fetch(
-    "http://localhost:3000/api/auth?cookies=" + parsedCookies.JWT
+    "http://localhost:3000/api/authAdmin?cookies=" + parsedCookies.JWT
   ).then((t) => t.json());
 
   if (auth.data != false) {
@@ -36,17 +36,10 @@ export default function Admin() {
       },
       body: JSON.stringify({ username: username, password: password }),
     }).then((t) => t.json());
+    console.log(res);
     if (res.data == true) {
-      async function fetchData() {
-        const auth = await fetch("/api/authAdmin").then((t) => t.json());
-        if (auth.data == true) {
-          setLogin(true);
+      router.push("/admin/dashboard");
 
-          router.push("/admin/dashboard");
-        } else {
-        }
-      }
-      fetchData();
       setCheckDetails(false);
     } else {
       setCheckDetails(true);

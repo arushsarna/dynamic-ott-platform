@@ -8,9 +8,9 @@ export default async function (req, res) {
   if (!jwt) {
     return res.json({ data: false });
   }
-  const verification = jwtmain.verify(jwt, KEY);
-
   try {
+    const verification = jwtmain.verify(jwt, KEY);
+
     adminSchema.find({ username: verification.username }, (error, data) => {
       if (error) {
         return res.json(error);

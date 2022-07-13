@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import * as cookie from "cookie";
 
 import { useRouter } from "next/router";
 import Box from "@mui/material/Box";
@@ -7,21 +8,29 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Sidebar from "../../components/Sidebar";
+export async function getServerSideProps(context) {
+  const parsedCookies = cookie.parse(context.req.headers.cookie || "");
+  console.log(parsedCookies.JWT);
+  const auth = await fetch(
+    "http://localhost:3000/api/authAdmin?cookies=" + parsedCookies.JWT
+  ).then((t) => t.json());
 
+  if (auth.data == false) {
+    return {
+      redirect: {
+        destination: "/admin",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
+}
 export default function Upload() {
   const [login, setLogin] = useState(false);
   const router = useRouter();
-  useEffect(() => {
-    async function fetchData() {
-      const auth = await fetch("/api/authAdmin").then((t) => t.json());
-      if (auth.data == false) {
-        router.push("/admin");
-      } else {
-        setLogin(true);
-      }
-    }
-    fetchData();
-  }, []);
+
   const [type, setType] = useState("Movie");
   const [title, setTitle] = useState();
   const [genere, setGenere] = useState();
@@ -60,13 +69,13 @@ export default function Upload() {
     setForm(false);
   }
   return (
-    <div className="flex">
+    <div className="flex bg-[#135CC5] h-screen text-white">
       <Sidebar />
-      <div className="container mx-auto px-4 h-full mb-20">
+      <div className="container mx-auto px-4 h-full mb-20 ">
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-6/12 px-4">
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
-              <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+              <div className="flex-auto px-4 lg:px-10 py-10 pt-0 bg-white rounded-lg text-black">
                 {!form && (
                   <div>
                     <div className=" mt-4">Form is Submitted!</div>

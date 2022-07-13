@@ -1,4 +1,5 @@
 import Sidebar from "../../components/Sidebar";
+import * as cookie from "cookie";
 
 import * as React from "react";
 import { useEffect, useState } from "react";
@@ -48,7 +49,25 @@ function createData(name, code, population, size) {
   const density = population / size;
   return { name, code, population, size, density };
 }
+export async function getServerSideProps(context) {
+  const parsedCookies = cookie.parse(context.req.headers.cookie || "");
+  console.log(parsedCookies.JWT);
+  const auth = await fetch(
+    "http://localhost:3000/api/authAdmin?cookies=" + parsedCookies.JWT
+  ).then((t) => t.json());
 
+  if (auth.data == false) {
+    return {
+      redirect: {
+        destination: "/admin",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
+}
 export default function Monitor() {
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -75,12 +94,15 @@ export default function Monitor() {
   };
 
   return (
-    <div className="flex">
+    <div className="flex bg-[#135CC5]  h-screen">
       <div>
         <Sidebar />
       </div>
-      <div className="p-20 ">
-        <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <div className=" p-20">
+        <Paper
+          className=" p-4 rounded-xl"
+          sx={{ width: "100%", overflow: "hidden" }}
+        >
           <TableContainer sx={{ maxHeight: 880 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
