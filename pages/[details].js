@@ -1,28 +1,35 @@
+import { typographyClasses } from "@mui/material";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 
 //https://www.bollywoodhungama.com/wp-content/uploads/2022/04/K.G.F-%E2%80%93-Chapter-2-15.jpg
-
+import * as cookie from "cookie";
 export async function getServerSideProps(context) {
-  console.log(context.params.details);
-
+  //console.log(context.params.details);
+  const parsedCookies = cookie.parse(context.req.headers.cookie || "");
   const result = await fetch(
     "http://localhost:3000/api/getId?_id=" + context.params.details
   );
+  const auth = await fetch(
+    "http://localhost:3000/api/auth?cookies=" + parsedCookies.JWT
+  ).then((t) => t.json());
   const data = await result.json();
-
+  try {
+    if (data[0].data == false || auth.data == false) {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+      };
+    }
+  } catch {}
   return {
-    props: { data }, // will be passed to the page component as props
+    props: { data },
   };
 }
 export default function Detail({ data }) {
-  console.log();
-  // const [height, setHeight] = useState(0);
-  // window.addEventListener("resize", function (event) {
-  //   setHeight(window.innerWidth);
-  // });
-  // console.log(height);
   return (
     <div className="">
       <Header />

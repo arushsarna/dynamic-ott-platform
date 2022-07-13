@@ -5,9 +5,9 @@ export default async function getId(req, res) {
   await dbConnect();
 
   try {
-    const result = content.find({ _id: req.query._id }, (data, err) => {
+    const result = content.find({ _id: req.query._id }, (err, data) => {
       if (err) {
-        res.json(err);
+        res.json([{ data: false }]);
       } else {
         res.json(data);
       }

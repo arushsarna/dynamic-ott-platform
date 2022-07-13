@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Header() {
   return (
-    <div className="h-[70px] bg-[#090b13] flex">
+    <div className="h-[70px] bg-[#090b13] flex max-w-full">
       <nav className="text-white px-10 py-5 ">OTT</nav>
       <nav className="flex  py-3 text-white justify-between mx-[calc(100vh_-_800px)] space-x-[50px] flex-1 ">
         <a className=" group flex items-center relative space-x-1 ">

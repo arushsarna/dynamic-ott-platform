@@ -3,15 +3,14 @@ const KEY = "fhdjifhidfijsd";
 import user from "../../models/user";
 import dbConnect from "./db";
 export default async function (req, res) {
-  const { cookies } = req;
-
-  const jwt = cookies.JWT;
+  const jwt = req.query.cookies;
 
   if (!jwt) {
     return res.json({ data: false });
   }
-  const verification = jwtmain.verify(jwt, KEY);
+
   try {
+    const verification = jwtmain.verify(jwt, KEY);
     const User = user.find({ phoneno: verification.phoneno }, (error, data) => {
       if (error) {
         res.json(error);
@@ -29,6 +28,10 @@ export default async function (req, res) {
       }
     });
   } catch (err) {
-    res.status(500).json(err);
+    var arr = {
+      err,
+    };
+    arr.data = false;
+    res.status(500).json(arr);
   }
 }

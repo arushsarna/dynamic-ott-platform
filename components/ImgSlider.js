@@ -13,22 +13,54 @@ export default function ImgSlider() {
     autoplay: true,
   };
   // const [data, setData] = useState();
- 
 
   return (
-    <Slider className=" rounded-xl mx-48 pt-10 px-4 " {...settings}>
-      <div className="shadow-xl ">
-        <div className="h-[480px] rounded-md   bg-no-repeat bg-center	bg-cover bg-fixed bg-green-100 bg-[url(https://i.ibb.co/7yqy10s/Jugjugg-Jeeyo-cover-image.jpg)]"></div>
+    <Slider className="  mx-48 pt-10 px-4 " {...settings}>
+      {/* <div className="shadow-xl ">
+        <img
+          className="object-cover"
+          src="https://i.ibb.co/7yqy10s/Jugjugg-Jeeyo-cover-image.jpg"
+        ></img>
+       
       </div>
       <div className="shadow-xl ">
-        <div className="h-[480px] rounded-md shadow-2xl  bg-no-repeat	bg-cover bg-fixed bg-[url(https://i.ibb.co/MRFDy0h/Rocketry-The-Nambi-Effect-2.jpg)] "></div>
+        <img
+          className="object-cover"
+          src="https://i.ibb.co/MRFDy0h/Rocketry-The-Nambi-Effect-2.jpg"
+        ></img>
+      
+      </div> */}
+      <div className="shadow-xl relative rounded-2xl h-[calc((100vh_-_70px)/2)] bg-red-500 w-full  ">
+        <img
+          className="object- rounded-2xl w-full h-full"
+          src="https://i.ibb.co/JcNDB3s/avengers.webp"
+        />
       </div>
-      <div className="shadow-xl ">
-        <div className="h-[480px] rounded-md shadow-2xl   bg-[url(https://i.ibb.co/JcNDB3s/avengers.webp)] bg-no-repeat	bg-cover bg-fixed"></div>
+      <div className="shadow-xl relative rounded-2xl h-[calc((100vh_-_70px)/2)] bg-red-500 w-full  ">
+        <img
+          className="object- rounded-2xl w-full h-full"
+          src="https://i.ibb.co/MRFDy0h/Rocketry-The-Nambi-Effect-2.jpg"
+        />
       </div>
-      <div className="shadow-xl ">
-        <div className="h-[480px] rounded-md shadow-2xl  bg-no-repeat	bg-cover bg-fixed bg-[url(https://i.ibb.co/cC5VMsv/Bahubali-2-The-Conclusion-4.jpg)] "></div>
+      <div className="shadow-xl relative rounded-2xl h-[calc((100vh_-_70px)/2)] bg-red-500 w-full  ">
+        <img
+          className="object- rounded-2xl w-full h-full"
+          src="https://i.ibb.co/7yqy10s/Jugjugg-Jeeyo-cover-image.jpg"
+        />
       </div>
+      <div className="shadow-xl relative rounded-2xl h-[calc((100vh_-_70px)/2)] bg-red-500 w-full  ">
+        <img
+          className="object- rounded-2xl w-full h-full"
+          src="https://i.ibb.co/cC5VMsv/Bahubali-2-The-Conclusion-4.jpg"
+        />
+      </div>
+      {/* <div className="shadow-xl ">
+        <img
+          className="object-cover"
+          src="https://i.ibb.co/cC5VMsv/Bahubali-2-The-Conclusion-4.jpg"
+        ></img>
+       
+      </div> */}
     </Slider>
   );
 }

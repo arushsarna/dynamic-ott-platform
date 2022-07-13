@@ -10,7 +10,6 @@ export default function tiles(props) {
     }
     fetchData();
   }, []);
-  console.log(data);
 
   return (
     <div className="px-20 mt-10 ">
@@ -20,7 +19,6 @@ export default function tiles(props) {
         {data.map((i) => (
           <Link href={`/${i._id}`}>
             <div key={i.toString()} className="    ">
-              {console.log(i.poster)}
               <img
                 className="object-cover rounded-md  hover:border-white hover:border-4 hover:scale-110  min-w-60 h-72 "
                 src={i.poster}
