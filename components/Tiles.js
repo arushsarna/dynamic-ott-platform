@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useEffect } from "react";
-export default function tiles(props) {
+export default function Tiles(props) {
   const [data, setData] = useState([]);
   useEffect(() => {
     async function fetchData() {
@@ -17,9 +17,10 @@ export default function tiles(props) {
 
       <div className="flex    gap-20  h-72 mt-10 ">
         {data.map((i) => (
-          <Link href={`/${i._id}`}>
+          <Link key={i.toString()} href={`/${i._id}`}>
             <div key={i.toString()} className="    ">
               <img
+                key={i.toString()}
                 className="object-cover rounded-md  hover:border-white hover:border-4 hover:scale-110  min-w-60 h-72 "
                 src={i.poster}
               />

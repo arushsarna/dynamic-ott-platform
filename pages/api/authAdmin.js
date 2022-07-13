@@ -3,9 +3,7 @@ const KEY = "fhdjifhidfijsd";
 import adminSchema from "../../models/admin";
 import dbConnect from "./db";
 export default async function (req, res) {
-  const { cookies } = req;
-  const { ver } = req;
-  const jwt = cookies.JWT;
+  const jwt = req.query.cookies;
 
   if (!jwt) {
     return res.json({ data: false });
@@ -25,7 +23,10 @@ export default async function (req, res) {
       }
     });
   } catch (err) {
-    return res.status(500).json(err);
+    var arr = err;
+    arr.data = false;
+
+    return res.status(500).json(arr);
   }
   return;
 }

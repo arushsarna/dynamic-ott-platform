@@ -1,7 +1,7 @@
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import React from "react";
 import * as cookie from "cookie";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 export async function getServerSideProps(context) {
   const parsedCookies = cookie.parse(context.req.headers.cookie || "");
 
@@ -21,7 +21,7 @@ export async function getServerSideProps(context) {
     props: {},
   };
 }
-export default function register() {
+export default function Index() {
   const [phoneno, setPhoneno] = useState();
   const [otp, setOtp] = useState();
   const [pin, setPin] = useState();

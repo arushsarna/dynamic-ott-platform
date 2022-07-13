@@ -49,7 +49,7 @@ function createData(name, code, population, size) {
   return { name, code, population, size, density };
 }
 
-export default function monitor() {
+export default function Monitor() {
   const [data, setData] = useState([]);
   useEffect(() => {
     async function fetchData() {

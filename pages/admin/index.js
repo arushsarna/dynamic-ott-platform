@@ -1,14 +1,31 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 
-// layout for page
-
+import * as cookie from "cookie";
 import { useRouter } from "next/router";
-export default function admin() {
-  const router = useRouter();
+// layout for page
+export async function getServerSideProps(context) {
+  const parsedCookies = cookie.parse(context.req.headers.cookie || "");
+
+  const auth = await fetch(
+    "http://localhost:3000/api/auth?cookies=" + parsedCookies.JWT
+  ).then((t) => t.json());
+
+  if (auth.data != false) {
+    return {
+      redirect: {
+        destination: "/admin/dashboard",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
+}
+export default function Admin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [login, setLogin] = useState(false);
+  const router = useRouter();
   const [checkDetails, setCheckDetails] = useState(false);
 
   async function submitform() {
@@ -27,30 +44,15 @@ export default function admin() {
 
           router.push("/admin/dashboard");
         } else {
-          setLogin(false);
-          setCheckDetails(true);
         }
       }
       fetchData();
       setCheckDetails(false);
     } else {
-      setLogin(false);
       setCheckDetails(true);
     }
   }
-  useEffect(() => {
-    async function fetchData() {
-      const auth = await fetch("/api/authAdmin").then((t) => t.json());
-      if (auth.data == true) {
-        setLogin(true);
 
-        router.push("/admin/dashboard");
-      } else {
-        setLogin(false);
-      }
-    }
-    fetchData();
-  }, []);
   return (
     <>
       <div className="container mx-auto px-4 h-full mt-20">

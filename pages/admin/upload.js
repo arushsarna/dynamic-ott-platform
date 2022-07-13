@@ -167,7 +167,10 @@ export default function Upload() {
                         </button>
                         <div> :-</div>
                         {tag.map((i) => (
-                          <div className="flex items-center   ">
+                          <div
+                            key={i.toSting()}
+                            className="flex items-center   "
+                          >
                             <div className="px-2">{i}</div>
                             <button
                               onClick={(e) => {

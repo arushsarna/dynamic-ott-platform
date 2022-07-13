@@ -30,7 +30,7 @@ export default function ImgSlider() {
         ></img>
       
       </div> */}
-      <div className="shadow-xl relative rounded-2xl h-[calc((100vh_-_70px)/2)] bg-red-500 w-full  ">
+      <div className="shadow-xl relative rounded-2xl h-[calc((100vh_-_70px)/2)]  bg-red-500 w-full  ">
         <img
           className="object- rounded-2xl w-full h-full"
           src="https://i.ibb.co/JcNDB3s/avengers.webp"
